@@ -79,6 +79,9 @@ bool OfficialScorer::calculateHitOccurs()
     unsigned short nHitsCount = m_pScoreBoard->getHitsCount();
     m_pScoreBoard->setHitsCount(++nHitsCount);
 
+    m_pScoreBoard->setStrikeCount(0);
+    m_pScoreBoard->setBallCount(0);
+
     return bEndAtTheBat;
 }
 
@@ -88,6 +91,9 @@ bool OfficialScorer::calculateOutOccurs()
 
     unsigned short nOutCount = m_pScoreBoard->getOutCount();
     m_pScoreBoard->setOutCount(++nOutCount);
+
+    m_pScoreBoard->setStrikeCount(0);
+    m_pScoreBoard->setBallCount(0);
 
     return bEndAtTheBat;
 }
