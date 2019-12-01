@@ -74,3 +74,32 @@ bool BaseballGameManager::isGameEnd(unsigned short outCount)
 
     return result;
 }
+
+void BaseballGameManager::showMenu()
+{
+    std::cout << "1. 데이터 입력" << std::endl;
+    std::cout << "2. 데이터 출력" << std::endl << std::endl;
+
+    std::cout << "메뉴선택 (1 - 2) : ";
+}
+
+unsigned short BaseballGameManager::receiveUserMenuSelect()
+{
+    unsigned short userInput = 0;
+    std::cin >> userInput;
+
+    std::cin.clear();
+    std::cin.ignore(INT_MAX, '\n');
+
+    return userInput;
+}
+
+void BaseballGameManager::performUserMenuSelection(unsigned short userInput)
+{
+    switch (userInput)
+    {
+    case 1: break;  //Todo: Function call to set member name, batting average, and team name.
+    case 2: break;  //Todo: Function call to print member name, batting average, and team name.
+    default: break; //Todo: Print to notify exception occured.
+    }
+}

@@ -32,6 +32,22 @@ public:
      */
     bool isGameEnd(unsigned short outCount);
 
+    /**
+     * Show baseball game menu.
+     */
+    void showMenu();
+
+    /**
+     * Receive user's menu select input.
+     */
+    unsigned short receiveUserMenuSelect();
+
+    /**
+     * Perform the menu selected by user.
+     */
+    void performUserMenuSelection(unsigned short userInput);
+
+
 private:
     PitchingResultGenerator *m_pPitchingResultGenerator;
     ScoreBoard *m_pScoreBoard;
