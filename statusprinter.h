@@ -10,7 +10,7 @@ public:
     ~StatusPrinter();
 
     /**
-     * Print pitching result in hangul on console.
+     * Print pitching result in hangul in console.
      *
      * @param strike Current Number of strike
      * @param ball Current Number of ball
@@ -21,7 +21,7 @@ public:
                             PitchingResult pitchingResult);
 
     /**
-     * Print current score board on console.
+     * Print current score board in console.
      *
      * @param strikeCount Current number of Strike.
      * @param ballCount Current number of Ball.
@@ -32,12 +32,12 @@ public:
                         unsigned short outCount);
 
     /**
-     * Print the next batter on console.
+     * Print the next batter in console.
      */
     void showNextBatter();
 
     /**
-     * Print game end comment on console.
+     * Print game end comment in console.
      *
      * @param hitsCount Number of hits when the match ends.
      */
@@ -45,40 +45,38 @@ public:
 
 private:
     /**
-     * Print announce when strike occurs on console.
+     * Print strike comment in console.
+     * And when strikeout occurs, call showThreeStrikeOutOccursComment() to print.
      *
      * @param strikeCount Current number of Strike.
-     * @param ballCount Current number of Ball.
      */
-    void showStrikeOccurs(unsigned short strike,
-                          unsigned short ball);
+    void showStrikeOccurs(unsigned short strike);
 
     /**
-     * Print announce when ball occurs on console.
+     * Print ball comment in console
+     * And when four-ball occurs, call showFourBallHitsOccursComment() to print.
      *
-     * @param strikeCount Current number of Strike.
      * @param ballCount Current number of Ball.
      */
-    void showBallOccurs(unsigned short strike,
-                        unsigned short ball);
+    void showBallOccurs(unsigned short ball);
 
     /**
-     * Print announce when hits occurs on console.
+     * Print hits comment in console.
      */
     void showHitsOccurs();
 
     /**
-     * Print announce when out occurs on console.
+     * Print out comment in console.
      */
     void showOutOccurs();
 
     /**
-     * Print out comment on console.
+     * Print 3 strike out comment in console.
      */
     void showThreeStrikeOutOccursComment();
 
     /**
-     * Print out comment on console.
+     * Print 4 ball hits comment in console.
      */
     void showFourBallHitsOccursComment();
 };

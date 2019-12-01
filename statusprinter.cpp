@@ -1,6 +1,7 @@
 #include "statusprinter.h"
 #include "pitchingresult.h"
 
+#include <iostream>
 
 StatusPrinter::StatusPrinter()
 {
@@ -16,63 +17,71 @@ void StatusPrinter::showPitchingResult(unsigned short strike,
                                        unsigned short ball,
                                        PitchingResult pitchingResult)
 {
-    //Todo: Implement simple output of pitching result to console screen
-
     if ( PitchingResult::STRIKE == pitchingResult ) {
-
+        showStrikeOccurs(strike);
     }
     else if ( PitchingResult::BALL == pitchingResult ) {
-
+        showBallOccurs(ball);
     }
     else if ( PitchingResult::HITS == pitchingResult ) {
-
+        showHitsOccurs();
     }
     else if ( PitchingResult::OUT == pitchingResult ) {
-
+        showOutOccurs();
     }
 }
 
 void StatusPrinter::showScoreBoard(unsigned short strikeCount, unsigned short ballCount, unsigned short outCount)
 {
-    //Todo: Implement to display current score board (ex. 2S 0B 1O) to console screen
+    std::cout << strikeCount << "S " << ballCount << "B " << outCount << "O" << std::endl;
 }
 
 void StatusPrinter::showNextBatter()
 {
-    //Todo: Implement to display next batter's appearance (ex. 다음 타자가 타석에 입장했습니다.) to console screen
+    std::cout << "다음 타자가 타석에 입장했습니다." << std::endl;
 }
 
 void StatusPrinter::showGameEndComment(unsigned short hitsCount)
 {
-    //Todo: Implement to game end comment. (ex. 최종 안타수 : 5 \n GAME OVER)
+    std::cout << "최종 안타수 : " << hitsCount << std::endl;
+    std::cout << "GAME OVER" << std::endl;
 }
 
-void StatusPrinter::showStrikeOccurs(unsigned short strike, unsigned short ball)
+void StatusPrinter::showStrikeOccurs(unsigned short strike)
 {
-    //Todo: Implement to display strike occurs
-}
+    std::cout << "스트라이크!" << std::endl;
 
-void StatusPrinter::showBallOccurs(unsigned short strike, unsigned short ball)
+    if ( 3 == ++strike )
+    {
+        showThreeStrikeOutOccursComment();
+    }
+}
+void StatusPrinter::showBallOccurs(unsigned short ball)
 {
-    //Todo: Implement to display ball occurs
+    std::cout << "볼!" << std::endl;
+
+    if ( 4 == ++ball )
+    {
+        showFourBallHitsOccursComment();
+    }
 }
 
 void StatusPrinter::showHitsOccurs()
 {
-    //Todo: Implement to display hits occurs
+    std::cout << "안타!";
 }
 
 void StatusPrinter::showOutOccurs()
 {
-    //Todo: Implement to display out occurs
+    std::cout << "아웃!";
 }
 
 void StatusPrinter::showThreeStrikeOutOccursComment()
 {
-    //Todo: Implement to display out occurs by 3 strike (2strike + 1strike)
+    std::cout << "아웃! (삼진)";
 }
 
 void StatusPrinter::showFourBallHitsOccursComment()
 {
-    //Todo: Implement to display hits occurs by 4 ball (3ball + 1ball)
+    std::cout << "안타! (4볼)";
 }
