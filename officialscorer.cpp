@@ -34,6 +34,13 @@ bool OfficialScorer::calculatePitchingResult(PitchingResult pitchingResult)
     return bEndAtTheBat;
 }
 
+void OfficialScorer::clearSBO()
+{
+    m_pScoreBoard->setStrikeCount(0);
+    m_pScoreBoard->setBallCount(0);
+    m_pScoreBoard->setOutCount(0);
+}
+
 bool OfficialScorer::calculateStrikeOccurs()
 {
     bool bEndAtTheBat = false;

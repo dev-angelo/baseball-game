@@ -17,7 +17,7 @@ public:
     /**
      * It is called for starting Baseball Game.
      */
-    void startGame();
+    void run();
 
 private:
     PitchingResultGenerator *m_pPitchingResultGenerator;
@@ -34,7 +34,7 @@ private:
      * Play one inning.
      *
      */
-    void playInning();
+    void playInning(BaseballTeam* pBaseballTeam);
 
     /**
      * Determine whether the game is finished through outCount.
@@ -58,6 +58,9 @@ private:
      * Perform the menu selected by user.
      */
     void performUserMenuSelection(unsigned short userInput);
+
+    void startGame();
+    bool playAttack(float battingAverage);
 }
 ;
 

@@ -34,38 +34,18 @@ BaseballGameManager::~BaseballGameManager()
     delete m_pStatusPrinter;
 }
 
-void BaseballGameManager::startGame()
+void BaseballGameManager::run()
 {
     std::cout << "신나는 야구 게임!" << std::endl;
 
     unsigned short selectedMenu = 0;
 
-    while ( 3 != selectedMenu )
+    while ( 5 != selectedMenu )
     {
         showMenu();
         selectedMenu = receiveUserMenuSelect();
         performUserMenuSelection(selectedMenu);
     }
-}
-
-void BaseballGameManager::playInning()
-{
-    PitchingResult pitchResult = m_pPitchingResultGenerator->generatePitchingResult();
-
-    m_pStatusPrinter->showPitchingResult(m_pScoreBoard->getStrikeCount(), m_pScoreBoard->getBallCount(),
-                                         pitchResult);
-
-
-    bool bEndTheAtBat = m_pOfficialScorer->calculatePitchingResult(pitchResult);
-
-    if ( (true == bEndTheAtBat ) && (false == isGameEnd(m_pScoreBoard->getOutCount())) ) {
-        m_pStatusPrinter->showNextBatter();
-    }
-    else {
-        std::cout << std::endl;
-    }
-
-    m_pStatusPrinter->showScoreBoard(m_pScoreBoard->getStrikeCount(), m_pScoreBoard->getBallCount(), m_pScoreBoard->getOutCount());
 }
 
 bool BaseballGameManager::isGameEnd(unsigned short outCount)
@@ -87,7 +67,8 @@ bool BaseballGameManager::isGameEnd(unsigned short outCount)
 void BaseballGameManager::showMenu()
 {
     std::cout << "1. 데이터 입력" << std::endl;
-    std::cout << "2. 데이터 출력" << std::endl << std::endl;
+    std::cout << "2. 데이터 출력" << std::endl;
+    std::cout << "3. 시합 시작" << std::endl << std::endl;
 
     std::cout << "메뉴선택 (1 - 2) : ";
 }
@@ -105,17 +86,67 @@ unsigned short BaseballGameManager::receiveUserMenuSelect()
 
 void BaseballGameManager::performUserMenuSelection(unsigned short userInput)
 {
-    switch (userInput)
-    {
-    case 1:
-        m_pHomeTeam->inputTeamData();
+    if ( 1 == userInput ) {
+        m_pHomeTeam->inputTeamData();   std::cout << std::endl;
         m_pAwayTeam->inputTeamData();
-        break;
-    case 2:
-        m_pHomeTeam->showTeamData();
+    }
+    else if ( 2 == userInput ) {
+        m_pHomeTeam->showTeamData();    std::cout << std::endl;
         m_pAwayTeam->showTeamData();
-        break;
-    default:
-        break;
+    }
+    else {
+        startGame();
+    }
+}
+
+void BaseballGameManager::startGame()
+{
+    unsigned short nCurrentInning = 0;
+
+    while ( 13 > nCurrentInning )
+    {
+        m_pCurrentAttackTeam = (nCurrentInning % 2 == 0) ? m_pHomeTeam : m_pAwayTeam;
+        m_pStatusPrinter->showInningTopBottom(nCurrentInning);
+        m_pStatusPrinter->showAttackTeam(m_pCurrentAttackTeam->getName());
+
+        playInning(m_pCurrentAttackTeam);
+        ++nCurrentInning;
+
+        m_pOfficialScorer->clearSBO();
+    }
+}
+
+bool BaseballGameManager::playAttack(float battingAverage)
+{
+    bool bEndTheAtBat = false;
+
+    while ( false == bEndTheAtBat )
+    {
+        PitchingResult pitchResult = m_pPitchingResultGenerator->generatePitchingResult(battingAverage);
+
+        m_pStatusPrinter->showPitchingResult(m_pScoreBoard->getStrikeCount(), m_pScoreBoard->getBallCount(), pitchResult);
+        bEndTheAtBat = m_pOfficialScorer->calculatePitchingResult(pitchResult);
+        m_pStatusPrinter->showScoreBoard(m_pScoreBoard->getStrikeCount(), m_pScoreBoard->getBallCount(), m_pScoreBoard->getOutCount());
+
+        if ( true == bEndTheAtBat )
+            break;
+    }
+
+    return bEndTheAtBat;
+}
+
+void BaseballGameManager::playInning(BaseballTeam* pBaseballTeam)
+{
+    unsigned short nCurrentBatterIndex = 0;
+    bool bEndTheAtBat = false;
+
+    while ( false == isGameEnd(m_pScoreBoard->getOutCount()) )
+    {
+        m_pStatusPrinter->showBatterEnter(nCurrentBatterIndex, pBaseballTeam->getMemberName(nCurrentBatterIndex));
+        bEndTheAtBat = playAttack(pBaseballTeam->getMemberBattingAverage(nCurrentBatterIndex));
+
+        if ( true == bEndTheAtBat ) {
+            nCurrentBatterIndex = (nCurrentBatterIndex + 1) % 9;
+        }
     }
 }

@@ -20,6 +20,8 @@ public:
      */
     bool calculatePitchingResult(PitchingResult pitchingResult);
 
+    void clearSBO();
+
 private:
     ScoreBoard* m_pScoreBoard;
 

@@ -14,7 +14,7 @@ PitchingResultGenerator::~PitchingResultGenerator()
 
 }
 
-PitchingResult PitchingResultGenerator::generatePitchingResult()
+PitchingResult PitchingResultGenerator::generatePitchingResult(float battingAverage)
 {
     int nRandomNumber = std::rand() % 4;
 

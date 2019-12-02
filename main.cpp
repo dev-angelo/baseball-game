@@ -3,7 +3,7 @@
 int main()
 {
     BaseballGameManager baseballGameManager;
-    baseballGameManager.startGame();
+    baseballGameManager.run();
 
     return 0;
 }

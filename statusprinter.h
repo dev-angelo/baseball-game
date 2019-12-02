@@ -1,6 +1,8 @@
 #ifndef STATUSPRINTER_H
 #define STATUSPRINTER_H
 
+#include <iostream>
+
 enum class PitchingResult;
 
 class StatusPrinter {
@@ -42,6 +44,10 @@ public:
      * @param hitsCount Number of hits when the match ends.
      */
     void showGameEndComment(unsigned short hitsCount);
+
+    void showBatterEnter(unsigned short batterNumber, std::string batterName);
+    void showAttackTeam(std::string teamName);
+    void showInningTopBottom(unsigned short inning);
 
 private:
     /**

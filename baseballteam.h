@@ -3,8 +3,6 @@
 
 #include <iostream>
 #include <vector>
-#include <sstream>
-#include "baseballteammember.h"
 
 class BaseballTeam
 {
@@ -16,6 +14,9 @@ public:
      * Getter about team name.
      */
     std::string getName() const;
+
+    float getMemberBattingAverage(unsigned short memberIndex);
+    std::string getMemberName(unsigned short memberIndex);
 
     /**
      * Input team and team member information from user.
@@ -29,7 +30,8 @@ public:
 
 private:
     std::string m_strName;
-    std::vector<BaseballTeamMember> m_lMember;
+    std::vector<std::string> m_lMemberName;
+    std::vector<float> m_lMemberBattingAverage;
     unsigned short m_nNumber;
 
     static unsigned short objectCount;
@@ -61,6 +63,10 @@ private:
      *
      */
     void appendMember(std::string name, float battingAverage);
+
+    bool checkUserInputAvailable(std::string userInput);
+    unsigned short getContainsCharacterCount(std::string userInput, std::string delimiter);
+    bool checkIsExceptionNotOccur(std::string userInput);
 };
 
 #endif // BASEBALLTEAM_H

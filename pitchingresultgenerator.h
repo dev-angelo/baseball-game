@@ -15,7 +15,7 @@ public:
      *
      * @return Result of pitching. (please refer to pitchingresult.h)
      */
-    PitchingResult generatePitchingResult();
+    PitchingResult generatePitchingResult(float battingAverage);
 };
 
 #endif // PITCHINGRESULTGENERATOR_H

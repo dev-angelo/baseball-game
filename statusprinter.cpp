@@ -50,7 +50,7 @@ void StatusPrinter::showGameEndComment(unsigned short hitsCount)
 
 void StatusPrinter::showStrikeOccurs(unsigned short strike)
 {
-    std::cout << "스트라이크!";
+    std::cout << "스트라이크!" << std::endl;
 
     if ( 3 == ++strike )
     {
@@ -59,7 +59,7 @@ void StatusPrinter::showStrikeOccurs(unsigned short strike)
 }
 void StatusPrinter::showBallOccurs(unsigned short ball)
 {
-    std::cout << "볼!";
+    std::cout << "볼!" << std::endl;
 
     if ( 4 == ++ball )
     {
@@ -69,20 +69,37 @@ void StatusPrinter::showBallOccurs(unsigned short ball)
 
 void StatusPrinter::showHitsOccurs()
 {
-    std::cout << "안타!";
+    std::cout << "안타!" << std::endl;
 }
 
 void StatusPrinter::showOutOccurs()
 {
-    std::cout << "아웃!";
+    std::cout << "아웃!" << std::endl;
 }
 
 void StatusPrinter::showThreeStrikeOutOccursComment()
 {
-    std::cout << std::endl << "아웃! (삼진)";
+    std::cout << std::endl << "아웃! (삼진)" << std::endl;
 }
 
 void StatusPrinter::showFourBallHitsOccursComment()
 {
-    std::cout << std::endl << "안타! (4볼)";
+    std::cout << std::endl << "안타! (4볼)" << std::endl;
+}
+
+void StatusPrinter::showBatterEnter(unsigned short batterNumber, std::string batterName)
+{
+    std::cout << batterNumber + 1 << "번 " << batterName << std::endl;
+}
+
+void StatusPrinter::showInningTopBottom(unsigned short inning)
+{
+    bool bIsTop = (inning + 1) % 2;
+
+    std::cout << (inning / 2) + 1 << "회" << (true == bIsTop ? "초" : "말") << " ";
+}
+
+void StatusPrinter::showAttackTeam(std::string teamName)
+{
+    std::cout << teamName << "의 공격" << std::endl;
 }
