@@ -45,7 +45,7 @@ void StatusPrinter::showNextBatter()
 void StatusPrinter::showGameEndComment(std::string homeTeamName, std::string awayTeamName,
                                        unsigned short homeTeamScore, unsigned short awayTeamScore)
 {
-    std::cout << "경기 종료 : " << std::endl;
+    std::cout << std::endl << "경기 종료 : " << std::endl << std::endl;
     std::cout << homeTeamName << " VS " << awayTeamName << std::endl;
     std::cout << homeTeamScore << " : " << awayTeamScore << std::endl;
     std::cout << "Thank you!" << std::endl;
