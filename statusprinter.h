@@ -46,8 +46,26 @@ public:
     void showGameEndComment(const std::string homeTeamName, const std::string awayTeamName,
                             const unsigned short homeTeamScore, const unsigned short awayTeamScore);
 
+    /**
+     * Print current batter number and name
+     *
+     * @param batterNumber Number of batter entered at plate
+     * @param batterName Name of batter entered at plate
+     */
     void showBatterEnter(const unsigned short batterNumber, const std::string batterName);
+
+    /**
+     * Print the team to attack
+     *
+     * @param teamName Team name of the attacking position
+     */
     void showAttackTeam(const std::string teamName);
+
+    /**
+     * Print wheater top of inning or bottom of inning
+     *
+     * @param teamName Team name of the attacking position
+     */
     void showInningTopBottom(const unsigned short inning);
 
 private:

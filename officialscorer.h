@@ -20,7 +20,16 @@ public:
      */
     bool calculatePitchingResult(const PitchingResult pitchingResult) const;
 
+    /**
+     * Clear current Strike, Ball, Hits, Out value
+     */
     void clearSBHO();
+
+    /**
+     * Function to set whether the current home team's attack turn or away team's attack turn.
+     *
+     * @param isCurrentHomeTeam A value indicating whether the attacking team is home or not.
+     */
     void setIsCurrentHomeTeam(const bool isCurrentHomeTeam);
 
 private:
@@ -47,8 +56,14 @@ private:
      */
     bool calculateOutOccurs() const;
 
+    /**
+     * Return whether the current home team's attack turn or away team's attack turn.
+     */
     bool getIsCurrentHomeTeam() const;
 
+    /**
+     * Function to handle SBHO when 4 balls occur
+     */
     void handleSBHOFourBallOccurs() const;
 };
 

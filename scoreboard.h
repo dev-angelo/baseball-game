@@ -40,6 +40,12 @@ public:
      */
     unsigned short getOutCount() const;
 
+    /**
+     * Return the score of home team or away team through isHomeTeam value.
+     *
+     * @param isHomeTeam Indicates whether or not it is the home team.
+     * @return score.
+     */
     unsigned short getScore(const bool isHomeTeam) const;
 
 private:
@@ -77,6 +83,12 @@ private:
      */
     void setOutCount(const unsigned short outCount);
 
+    /**
+     * Set score of home team or away team through isHomeTeam value.
+     *
+     * @param score Score to be saved
+     * @param isHomeTeam Indicates whether or not it is the home team.
+     */
     void setScore(const unsigned short score, const bool isHomeTeam);
 };
 
