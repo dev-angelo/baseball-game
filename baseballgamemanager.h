@@ -19,6 +19,17 @@ public:
      */
     void startGame();
 
+private:
+    PitchingResultGenerator *m_pPitchingResultGenerator;
+    ScoreBoard *m_pScoreBoard;
+    OfficialScorer *m_pOfficialScorer;
+    StatusPrinter *m_pStatusPrinter;
+
+    BaseballTeam *m_pHomeTeam;
+    BaseballTeam *m_pAwayTeam;
+
+    BaseballTeam *m_pCurrentAttackTeam;
+
     /**
      * Play one inning.
      *
@@ -47,18 +58,6 @@ public:
      * Perform the menu selected by user.
      */
     void performUserMenuSelection(unsigned short userInput);
-
-
-private:
-    PitchingResultGenerator *m_pPitchingResultGenerator;
-    ScoreBoard *m_pScoreBoard;
-    OfficialScorer *m_pOfficialScorer;
-    StatusPrinter *m_pStatusPrinter;
-
-    BaseballTeam *m_pHomeTeam;
-    BaseballTeam *m_pAwayTeam;
-
-    BaseballTeam *m_pCurrentAttackTeam;
 }
 ;
 
