@@ -6,8 +6,11 @@ ScoreBoard::ScoreBoard() :
     m_nHitsCount(0),
     m_nOutCount(0)
 {
-    m_lScore[0] = 0;
-    m_lScore[1] = 0;
+    for ( int index = 0 ; index < 6 ; ++index )
+    {
+        m_lHomeTeamScore[index] = 0;
+        m_lAwayTeamScore[index] = 0;
+    }
 }
 
 ScoreBoard::~ScoreBoard()
@@ -35,13 +38,17 @@ void ScoreBoard::setOutCount(const unsigned short outCount)
     m_nOutCount = outCount;
 }
 
-void ScoreBoard::setScore(const unsigned short score, const bool isHomeTeam)
+void ScoreBoard::setScore(const unsigned short score,
+                          const unsigned short inning,
+                          const bool isHomeTeam)
 {
+    unsigned short nCvtInning = (inning / 2);
+
     if ( true == isHomeTeam ) {
-        m_lScore[0] = score;
+        m_lHomeTeamScore[nCvtInning] = score;
     }
     else {
-        m_lScore[1] = score;
+        m_lAwayTeamScore[nCvtInning] = score;
     }
 }
 
@@ -68,14 +75,26 @@ unsigned short ScoreBoard::getOutCount() const
 unsigned short ScoreBoard::getScore(const bool isHomeTeam) const
 {
     unsigned short nScore = 0;
+    const unsigned short* pCurrentTeamScore = (isHomeTeam == true) ? m_lHomeTeamScore : m_lAwayTeamScore;
 
-    if ( true == isHomeTeam ) {
-        nScore = m_lScore[0];
-    }
-    else {
-        nScore = m_lScore[1];
+    for ( int index = 0 ; index < 6 ; ++index ) {
+        nScore += *(pCurrentTeamScore + index);
     }
 
     return nScore;
+}
 
+unsigned short ScoreBoard::getScore(const unsigned short inning, const bool isHomeTeam) const
+{
+    unsigned short nScore = 0;
+    unsigned short nCvtInning = (inning / 2);
+
+    if ( true == isHomeTeam ) {
+        nScore = m_lHomeTeamScore[nCvtInning];
+    }
+    else {
+        nScore = m_lAwayTeamScore[nCvtInning];
+    }
+
+    return nScore;
 }

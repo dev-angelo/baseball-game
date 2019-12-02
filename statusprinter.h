@@ -59,14 +59,7 @@ public:
      *
      * @param teamName Team name of the attacking position
      */
-    void showAttackTeam(const std::string teamName);
-
-    /**
-     * Print wheater top of inning or bottom of inning
-     *
-     * @param teamName Team name of the attacking position
-     */
-    void showInningTopBottom(const unsigned short inning);
+    void showAttackTeam(const unsigned short inning, const std::string teamName);
 
 private:
     /**

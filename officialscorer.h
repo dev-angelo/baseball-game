@@ -32,9 +32,12 @@ public:
      */
     void setIsCurrentHomeTeam(const bool isCurrentHomeTeam);
 
+    void setCurrentInning(const unsigned short currentInning);
+
 private:
     ScoreBoard* m_pScoreBoard;
     bool m_bIsCurrentHomeTeam;
+    unsigned short m_nCurrentInning;
 
     /**
      * Calculate strike count when strike occurs
@@ -65,6 +68,8 @@ private:
      * Function to handle SBHO when 4 balls occur
      */
     void handleSBHOFourBallOccurs() const;
+
+    unsigned short getCurrentInning() const;
 };
 
 #endif // OFFICIALSCORER_H

@@ -103,14 +103,11 @@ void StatusPrinter::showBatterEnter(const unsigned short batterNumber, const std
     std::cout << batterNumber + 1 << "번 " << batterName << std::endl;
 }
 
-void StatusPrinter::showInningTopBottom(const unsigned short inning)
+void StatusPrinter::showAttackTeam(const unsigned short inning, const std::string teamName)
 {
     bool bIsTop = (inning + 1) % 2;
 
     std::cout << (inning / 2) + 1 << "회" << (true == bIsTop ? "초" : "말") << " ";
-}
 
-void StatusPrinter::showAttackTeam(const std::string teamName)
-{
     std::cout << teamName << "의 공격" << std::endl;
 }

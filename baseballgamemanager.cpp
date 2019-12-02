@@ -125,10 +125,10 @@ void BaseballGameManager::startGame()
     unsigned short nCurrentInning = 0;
 
     while ( 12 > nCurrentInning ) {
+        m_pOfficialScorer->setCurrentInning(nCurrentInning);
         m_pCurrentAttackTeam = ((nCurrentInning + 1) % 2 == 1) ? m_pHomeTeam : m_pAwayTeam;
         m_pOfficialScorer->setIsCurrentHomeTeam(((nCurrentInning + 1) % 2 == 1) ? true : false);
-        m_pStatusPrinter->showInningTopBottom(nCurrentInning);
-        m_pStatusPrinter->showAttackTeam(m_pCurrentAttackTeam->getName());
+        m_pStatusPrinter->showAttackTeam(nCurrentInning, m_pCurrentAttackTeam->getName());
 
         playInning(m_pCurrentAttackTeam);
         ++nCurrentInning;

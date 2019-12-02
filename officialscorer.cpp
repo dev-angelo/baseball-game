@@ -4,7 +4,8 @@
 #include "pitchingresult.h"
 
 OfficialScorer::OfficialScorer(ScoreBoard* scoreBoard) :
-    m_pScoreBoard(scoreBoard)
+    m_pScoreBoard(scoreBoard),
+    m_nCurrentInning(0)
 {
 
 }
@@ -46,6 +47,11 @@ void OfficialScorer::setIsCurrentHomeTeam(const bool isCurrentHomeTeam)
     m_bIsCurrentHomeTeam = isCurrentHomeTeam;
 }
 
+void OfficialScorer::setCurrentInning(const unsigned short currentInning)
+{
+    m_nCurrentInning = currentInning;
+}
+
 bool OfficialScorer::calculateStrikeOccurs() const
 {
     bool bEndAtTheBat = false;
@@ -84,7 +90,9 @@ bool OfficialScorer::calculateHitOccurs() const
     bool bEndAtTheBat = true;
 
     unsigned short nHitsCount = m_pScoreBoard->getHitsCount();
-    m_pScoreBoard->setScore(m_pScoreBoard->getScore(getIsCurrentHomeTeam()) + (m_pScoreBoard->getHitsCount() + 1) / 4, getIsCurrentHomeTeam());
+    m_pScoreBoard->setScore(m_pScoreBoard->getScore(getCurrentInning(), getIsCurrentHomeTeam()) + (m_pScoreBoard->getHitsCount() + 1) / 4,
+                            getCurrentInning(),
+                            getIsCurrentHomeTeam());
     m_pScoreBoard->setHitsCount(++nHitsCount);
 
     if ( 4 == m_pScoreBoard->getHitsCount() )
@@ -117,9 +125,16 @@ bool OfficialScorer::getIsCurrentHomeTeam() const
 void OfficialScorer::handleSBHOFourBallOccurs() const
 {
     m_pScoreBoard->setStrikeCount(0);   m_pScoreBoard->setBallCount(0);
-    m_pScoreBoard->setScore(m_pScoreBoard->getScore(getIsCurrentHomeTeam()) + (m_pScoreBoard->getHitsCount() + 1) / 4, getIsCurrentHomeTeam());
+    m_pScoreBoard->setScore(m_pScoreBoard->getScore(getCurrentInning(), getIsCurrentHomeTeam()) + (m_pScoreBoard->getHitsCount() + 1) / 4,
+                            getCurrentInning(),
+                            getIsCurrentHomeTeam());
     m_pScoreBoard->setHitsCount(m_pScoreBoard->getHitsCount() + 1);
 
     if ( 4 == m_pScoreBoard->getHitsCount())
         m_pScoreBoard->setHitsCount(0);
+}
+
+unsigned short OfficialScorer::getCurrentInning() const
+{
+    return m_nCurrentInning;
 }
