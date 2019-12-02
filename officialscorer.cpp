@@ -17,7 +17,6 @@ OfficialScorer::~OfficialScorer()
 bool OfficialScorer::calculatePitchingResult(PitchingResult pitchingResult)
 {
     bool bEndAtTheBat = false;
-
     if ( PitchingResult::STRIKE == pitchingResult ) {
         bEndAtTheBat = calculateStrikeOccurs();
     }

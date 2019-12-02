@@ -17,10 +17,11 @@ public:
      */
     PitchingResult generatePitchingResult(double battingAverage);
     PitchingResult determinePitchingType(int generatedRamdomNumber,
-                                         int outPercentage,
-                                         int battingAverage,
-                                         int strikePercentage,
-                                         int ballPercentage);
+                                         int outValue,
+                                         int battingValue,
+                                         int strikeValue,
+                                         int ballValue,
+                                         int pivotValue);
 };
 
 #endif // PITCHINGRESULTGENERATOR_H
