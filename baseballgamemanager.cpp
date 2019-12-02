@@ -37,13 +37,15 @@ BaseballGameManager::~BaseballGameManager()
 void BaseballGameManager::startGame()
 {
     std::cout << "신나는 야구 게임!" << std::endl;
-    std::cout << "첫번째 타자가 입장하였습니다." << std::endl << std::endl;
 
-    while ( false == isGameEnd(m_pScoreBoard->getOutCount()) ) {
-        playInning();
+    unsigned short selectedMenu = 0;
+
+    while ( 3 != selectedMenu )
+    {
+        showMenu();
+        selectedMenu = receiveUserMenuSelect();
+        performUserMenuSelection(selectedMenu);
     }
-
-    m_pStatusPrinter->showGameEndComment(m_pScoreBoard->getHitsCount());
 }
 
 void BaseballGameManager::playInning()
@@ -105,8 +107,15 @@ void BaseballGameManager::performUserMenuSelection(unsigned short userInput)
 {
     switch (userInput)
     {
-    case 1: break;  //Todo: Function call to set member name, batting average, and team name.
-    case 2: break;  //Todo: Function call to print member name, batting average, and team name.
-    default: break; //Todo: Print to notify exception occured.
+    case 1:
+        m_pHomeTeam->inputTeamData();
+        m_pAwayTeam->inputTeamData();
+        break;
+    case 2:
+        m_pHomeTeam->showTeamData();
+        m_pAwayTeam->showTeamData();
+        break;
+    default:
+        break;
     }
 }
