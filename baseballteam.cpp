@@ -76,8 +76,14 @@ void BaseballTeam::inputTeamData()
 
 std::string BaseballTeam::receiveTeamName() const
 {
-    std::string strTeamName;
-    std::getline(std::cin, strTeamName);
+    std::string strTeamName = "";
+
+    while ( true == strTeamName.empty() ) {
+        std::getline(std::cin, strTeamName);
+
+        if ( true == strTeamName.empty() )
+            std::cout << "팀 명을 입력해주세요. >";
+    }
 
     return strTeamName;
 }
@@ -94,7 +100,7 @@ std::vector<std::string> BaseballTeam::receiveTeamMemberInformation() const
             memberInformation = parseTeamMemberInformation(strBuffer);
         }
         else {
-            std::cout << "올바른 팀원 정보를 입력해주세요." << std::endl;
+            std::cout << "올바른 정보를 입력해주세요. >";
         }
     }
 

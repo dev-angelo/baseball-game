@@ -52,6 +52,10 @@ void StatusPrinter::showGameEndComment(const std::string homeTeamName,
     std::cout << std::endl << "경기 종료 : " << std::endl << std::endl;
     std::cout << homeTeamName << " VS " << awayTeamName << std::endl;
     std::cout << homeTeamScore << " : " << awayTeamScore << std::endl;
+
+    if ( homeTeamScore == awayTeamScore )
+        std::cout << "무승부입니다!" << std::endl;
+
     std::cout << "Thank you!" << std::endl;
 }
 
