@@ -7,6 +7,8 @@
 
 #include "pitchingresult.h"
 
+#include "baseballteam.h"
+
 #include <iostream>
 
 #define MAXIMUM_OUT_COUNT 2
@@ -17,6 +19,11 @@ BaseballGameManager::BaseballGameManager()
     m_pScoreBoard = new ScoreBoard;
     m_pOfficialScorer = new OfficialScorer(m_pScoreBoard);
     m_pStatusPrinter = new StatusPrinter;
+
+    m_pHomeTeam = new BaseballTeam;
+    m_pAwayTeam = new BaseballTeam;
+
+    m_pCurrentAttackTeam = m_pHomeTeam;
 }
 
 BaseballGameManager::~BaseballGameManager()

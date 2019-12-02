@@ -5,6 +5,7 @@ class PitchingResultGenerator;
 class ScoreBoard;
 class OfficialScorer;
 class StatusPrinter;
+class BaseballTeam;
 
 class BaseballGameManager
 {
@@ -53,6 +54,11 @@ private:
     ScoreBoard *m_pScoreBoard;
     OfficialScorer *m_pOfficialScorer;
     StatusPrinter *m_pStatusPrinter;
+
+    BaseballTeam *m_pHomeTeam;
+    BaseballTeam *m_pAwayTeam;
+
+    BaseballTeam *m_pCurrentAttackTeam;
 }
 ;
 
