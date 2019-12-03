@@ -20,8 +20,9 @@ public:
                                          const int outValue,
                                          const int battingValue,
                                          const int strikeValue,
-                                         const int ballValue,
-                                         const int pivotValue) const;
+                                         const int ballValue) const;
+
+    int generateRandomValue(const int maxSize) const;
 };
 
 #endif // PITCHINGRESULTGENERATOR_H

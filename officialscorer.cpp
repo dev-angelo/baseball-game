@@ -109,12 +109,11 @@ bool OfficialScorer::calculateHitOccurs() const
 {
     bool bEndAtTheBat = true;
 
-    m_pScoreBoard->setTeamScore(m_pScoreBoard->getTeamScore(getCurrentInning(), getIsCurrentHomeTeam()) + (m_pScoreBoard->getHitsCount() + 1) / 4,
-                            getCurrentInning(), getIsCurrentHomeTeam());
     m_pScoreBoard->setHitsCount(m_pScoreBoard->getHitsCount() + 1);
 
-    if ( 4 == m_pScoreBoard->getHitsCount() )
-        m_pScoreBoard->setHitsCount(0);
+    if ( 4 <= m_pScoreBoard->getHitsCount() )
+        m_pScoreBoard->setTeamScore(m_pScoreBoard->getTeamScore(getCurrentInning(), getIsCurrentHomeTeam()) + 1,
+                                getCurrentInning(), getIsCurrentHomeTeam());
 
     m_pScoreBoard->setStrikeCount(0);
     m_pScoreBoard->setBallCount(0);
@@ -156,13 +155,12 @@ void OfficialScorer::handleSBHOThreeStrikeOccurs() const
 void OfficialScorer::handleSBHOFourBallOccurs() const
 {
     m_pScoreBoard->setStrikeCount(0);   m_pScoreBoard->setBallCount(0);
-    m_pScoreBoard->setTeamScore(m_pScoreBoard->getTeamScore(getCurrentInning(), getIsCurrentHomeTeam()) + (m_pScoreBoard->getHitsCount() + 1) / 4,
-                            getCurrentInning(),
-                            getIsCurrentHomeTeam());
     m_pScoreBoard->setHitsCount(m_pScoreBoard->getHitsCount() + 1);
 
-    if ( 4 == m_pScoreBoard->getHitsCount())
-        m_pScoreBoard->setHitsCount(0);
+    if ( 4 <= m_pScoreBoard->getHitsCount())
+        m_pScoreBoard->setTeamScore(m_pScoreBoard->getTeamScore(getCurrentInning(), getIsCurrentHomeTeam()) + 1,
+                                getCurrentInning(),
+                                getIsCurrentHomeTeam());
 
     increaseTeamHitsCount();
 }
