@@ -67,7 +67,7 @@ void StatusPrinter::showBallOccurs(const unsigned short ball)
 {
     std::cout << "º¼!" << std::endl;
 
-    if ( 4 == ball + 1 )
+    if ( 4 == ball + 1)
     {
         showFourBallHitsOccursComment();
     }
@@ -85,15 +85,15 @@ void StatusPrinter::showOutOccurs()
 
 void StatusPrinter::showThreeStrikeOutOccursComment()
 {
-    std::cout << std::endl << "¾Æ¿ô! (»ïÁø)" << std::endl;
+    std::cout << "¾Æ¿ô! (»ïÁø)" << std::endl;
 }
 
 void StatusPrinter::showFourBallHitsOccursComment()
 {
-    std::cout << std::endl << "¾ÈÅ¸! (4º¼)" << std::endl;
+    std::cout << "¾ÈÅ¸! (4º¼)" << std::endl;
 }
 
 void StatusPrinter::showBatterEnter(const unsigned short batterNumber, const std::string batterName)
 {
-    std::cout << batterNumber + 1 << "¹ø " << batterName << std::endl;
+    std::cout << batterNumber + 1 << "¹ø " << batterName << std::endl << std::endl;
 }

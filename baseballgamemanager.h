@@ -30,11 +30,13 @@ private:
 
     BaseballTeam *m_pCurrentAttackTeam;
 
+    unsigned short m_nSkipInning;
+
     /**
      * Play one inning.
      *
      */
-    void playInning();
+    void playInning(unsigned short nCurrentInning);
 
     /**
      * Determine whether the game is finished through outCount.
@@ -54,6 +56,8 @@ private:
      */
     unsigned short receiveUserMenuSelect() const;
 
+    void receiveUserMenuSelectInGame(const unsigned short nCurrentInning);
+
     /**
      * Perform the menu selected by user.
      */
@@ -65,8 +69,11 @@ private:
     bool checkUserMenuSelectionAvailable(const unsigned short userInput) const;
 
     void startGame();
-    bool playAttack(const unsigned short nCurrentBatterIndex) const;
-    bool doPitching(const unsigned short nCurrentBatterIndex) const;
+    bool playAttack(const unsigned short nCurrentBatterIndex);
+    void setComponent(const unsigned short currentInning);
+
+    void setSkipInning(const unsigned short skipInning);
+    unsigned short getSkipInning() const;
 }
 ;
 

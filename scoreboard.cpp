@@ -222,7 +222,8 @@ void ScoreBoard::showTeamMemberName()
 {
     for ( std::vector<int>::size_type index = 0 ; index < 9 ; ++index ) {
         std::cout << "|";
-        std::cout << m_lTeamMemberName[0][index] << " " << m_lTeamMemberName[1][index] << std::endl;
+        std::cout << index << ". " << m_lTeamMemberName[0][index] << " "
+                  << index << ". " << m_lTeamMemberName[1][index] << std::endl;
     }
 }
 

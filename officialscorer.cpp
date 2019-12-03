@@ -143,11 +143,11 @@ bool OfficialScorer::getIsCurrentHomeTeam() const
 
 void OfficialScorer::handleSBHOThreeStrikeOccurs() const
 {
-    m_pScoreBoard->setStrikeCount(0);
-    m_pScoreBoard->setBallCount(0);
-
     unsigned short nOutCount = m_pScoreBoard->getOutCount();
     m_pScoreBoard->setOutCount(++nOutCount);
+
+    m_pScoreBoard->setStrikeCount(0);
+    m_pScoreBoard->setBallCount(0);
 
     increaseTeamThreeOutCount();
 }
