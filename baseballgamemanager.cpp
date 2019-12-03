@@ -143,13 +143,12 @@ bool BaseballGameManager::playAttack(const double battingAverage) const
 {
     bool bEndTheAtBat = false;
 
-    while ( false == bEndTheAtBat )
-    {
+    while ( false == bEndTheAtBat ) {
         PitchingResult pitchResult = m_pPitchingResultGenerator->generatePitchingResult(battingAverage);
-
         m_pStatusPrinter->showPitchingResult(m_pScoreBoard->getStrikeCount(), m_pScoreBoard->getBallCount(), pitchResult);
         bEndTheAtBat = m_pOfficialScorer->calculatePitchingResult(pitchResult);
         m_pScoreBoard->showScoreBoard();
+        m_pOfficialScorer->increaseTeamPitchingCount();
 
         if ( true == bEndTheAtBat )
             break;

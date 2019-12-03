@@ -52,7 +52,7 @@ void OfficialScorer::setCurrentInning(const unsigned short currentInning)
     m_nCurrentInning = currentInning;
 }
 
-void OfficialScorer::increaseTeamPitchingCount()
+void OfficialScorer::increaseTeamPitchingCount() const
 {
     bool bIsCurrentHomeTeam = getIsCurrentHomeTeam();
 
@@ -60,7 +60,7 @@ void OfficialScorer::increaseTeamPitchingCount()
                                     , bIsCurrentHomeTeam);
 }
 
-void OfficialScorer::increaseTeamThreeOutCount()
+void OfficialScorer::increaseTeamThreeOutCount() const
 {
     bool bIsCurrentHomeTeam = getIsCurrentHomeTeam();
 
@@ -68,7 +68,7 @@ void OfficialScorer::increaseTeamThreeOutCount()
                                     , bIsCurrentHomeTeam);
 }
 
-void OfficialScorer::increaseTeamHitsCount()
+void OfficialScorer::increaseTeamHitsCount() const
 {
     bool bIsCurrentHomeTeam = getIsCurrentHomeTeam();
 
@@ -83,11 +83,7 @@ bool OfficialScorer::calculateStrikeOccurs() const
     m_pScoreBoard->setStrikeCount(++nStrikeCount);
 
     if ( static_cast<unsigned short>(SBMaximumCount::THREE_STRIKE) == nStrikeCount ) {
-        m_pScoreBoard->setStrikeCount(0);
-        m_pScoreBoard->setBallCount(0);
-
-        unsigned short nOutCount = m_pScoreBoard->getOutCount();
-        m_pScoreBoard->setOutCount(++nOutCount);
+        handleSBHOThreeStrikeOccurs();
 
         bEndAtTheBat = true;
     }
@@ -123,6 +119,8 @@ bool OfficialScorer::calculateHitOccurs() const
     m_pScoreBoard->setStrikeCount(0);
     m_pScoreBoard->setBallCount(0);
 
+    increaseTeamHitsCount();
+
     return bEndAtTheBat;
 }
 
@@ -144,6 +142,17 @@ bool OfficialScorer::getIsCurrentHomeTeam() const
     return m_bIsCurrentHomeTeam;
 }
 
+void OfficialScorer::handleSBHOThreeStrikeOccurs() const
+{
+    m_pScoreBoard->setStrikeCount(0);
+    m_pScoreBoard->setBallCount(0);
+
+    unsigned short nOutCount = m_pScoreBoard->getOutCount();
+    m_pScoreBoard->setOutCount(++nOutCount);
+
+    increaseTeamThreeOutCount();
+}
+
 void OfficialScorer::handleSBHOFourBallOccurs() const
 {
     m_pScoreBoard->setStrikeCount(0);   m_pScoreBoard->setBallCount(0);
@@ -154,6 +163,8 @@ void OfficialScorer::handleSBHOFourBallOccurs() const
 
     if ( 4 == m_pScoreBoard->getHitsCount())
         m_pScoreBoard->setHitsCount(0);
+
+    increaseTeamHitsCount();
 }
 
 unsigned short OfficialScorer::getCurrentInning() const

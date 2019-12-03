@@ -34,9 +34,9 @@ public:
 
     void setCurrentInning(const unsigned short currentInning);
 
-    void increaseTeamPitchingCount();
-    void increaseTeamThreeOutCount();
-    void increaseTeamHitsCount();
+    void increaseTeamPitchingCount() const;
+    void increaseTeamThreeOutCount() const;
+    void increaseTeamHitsCount() const;
 
 private:
     ScoreBoard* m_pScoreBoard;
@@ -72,6 +72,7 @@ private:
      * Function to handle SBHO when 4 balls occur
      */
     void handleSBHOFourBallOccurs() const;
+    void handleSBHOThreeStrikeOccurs() const;
 
     unsigned short getCurrentInning() const;
 };
