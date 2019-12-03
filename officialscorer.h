@@ -34,6 +34,10 @@ public:
 
     void setCurrentInning(const unsigned short currentInning);
 
+    void increaseTeamPitchingCount();
+    void increaseTeamThreeOutCount();
+    void increaseTeamHitsCount();
+
 private:
     ScoreBoard* m_pScoreBoard;
     bool m_bIsCurrentHomeTeam;
