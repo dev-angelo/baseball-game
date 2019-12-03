@@ -6,13 +6,10 @@ ScoreBoard::ScoreBoard() :
     m_nHitsCount(0),
     m_nOutCount(0)
 {
-    for ( int teamIndex = 0 ; teamIndex < 2 ; ++teamIndex )
-    {
-        for ( int memberIndex = 0 ; memberIndex < 6 ; ++memberIndex )
-        {
-            m_lTeamScore[teamIndex][memberIndex] = 0;
-        }
-    }
+    initTeamScore();
+    initTeamPitchingCount();
+    initTeamThreeOutCount();
+    initTeamHitsCount();
 }
 
 ScoreBoard::~ScoreBoard()
@@ -99,4 +96,48 @@ unsigned short ScoreBoard::getScore(const unsigned short inning, const bool isHo
     }
 
     return nScore;
+}
+
+void ScoreBoard::initTeamScore()
+{
+    for ( int teamIndex = 0 ; teamIndex < 2 ; ++teamIndex )
+    {
+        for ( int memberIndex = 0 ; memberIndex < 6 ; ++memberIndex )
+        {
+            m_lTeamScore[teamIndex][memberIndex] = 0;
+        }
+    }
+}
+
+void ScoreBoard::initTeamPitchingCount()
+{
+    for ( int teamIndex = 0 ; teamIndex < 2 ; ++teamIndex )
+    {
+        for ( int memberIndex = 0 ; memberIndex < 6 ; ++memberIndex )
+        {
+            m_lTeamPitchingCount[teamIndex][memberIndex] = 0;
+        }
+    }
+}
+
+void ScoreBoard::initTeamThreeOutCount()
+{
+    for ( int teamIndex = 0 ; teamIndex < 2 ; ++teamIndex )
+    {
+        for ( int memberIndex = 0 ; memberIndex < 6 ; ++memberIndex )
+        {
+            m_lTeamThreeOutCount[teamIndex][memberIndex] = 0;
+        }
+    }
+}
+
+void ScoreBoard::initTeamHitsCount()
+{
+    for ( int teamIndex = 0 ; teamIndex < 2 ; ++teamIndex )
+    {
+        for ( int memberIndex = 0 ; memberIndex < 6 ; ++memberIndex )
+        {
+            m_lTeamHitsCount[teamIndex][memberIndex] = 0;
+        }
+    }
 }

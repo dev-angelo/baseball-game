@@ -56,6 +56,14 @@ private:
     unsigned short m_nOutCount;
 
     unsigned short m_lTeamScore[2][6];
+    unsigned short m_lTeamPitchingCount[2][6];
+    unsigned short m_lTeamThreeOutCount[2][6];
+    unsigned short m_lTeamHitsCount[2][6];
+
+    void initTeamScore();
+    void initTeamPitchingCount();
+    void initTeamThreeOutCount();
+    void initTeamHitsCount();
 
 
     /**
