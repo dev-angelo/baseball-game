@@ -16,8 +16,8 @@ PitchingResultGenerator::~PitchingResultGenerator()
 
 PitchingResult PitchingResultGenerator::generatePitchingResult(const double battingAverage) const
 {
-    int nStrikeValue = static_cast<int>(((1 - battingAverage)/2 - 0.035)*10000);
-    int nBallValue = static_cast<int>(((1 - battingAverage)/2 - 0.035)*10000);
+    int nStrikeValue = static_cast<int>(((1 - battingAverage)/2 - 0.05)*10000);
+    int nBallValue = static_cast<int>(((1 - battingAverage)/2 - 0.05)*10000);
     int nOutValue = static_cast<int>(0.1 * 10000);
     int nBattingValue = static_cast<int>(battingAverage * 10000);
     int nPivotValue = nStrikeValue + nBallValue + nOutValue + nBattingValue;
