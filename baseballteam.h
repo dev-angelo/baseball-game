@@ -69,6 +69,7 @@ private:
     unsigned short getContainsCharacterCount(const std::string userInput, const std::string delimiter) const;
     bool checkIsExceptionNotOccur(const std::string userInput) const;
     bool checkIsBattingAverageInRange(const double battingAverage) const;
+    bool checkIsStringEmpty(const std::string string) const;
 };
 
 #endif // BASEBALLTEAM_H
