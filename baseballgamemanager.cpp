@@ -180,7 +180,7 @@ void BaseballGameManager::startGame()
     m_pStatusPrinter->showGameEndComment(m_pHomeTeam->getName(), m_pAwayTeam->getName(), m_pScoreBoard->getTeamScore(true), m_pScoreBoard->getTeamScore(false));
 }
 
-bool BaseballGameManager::playAttack(const unsigned short nCurrentBatterIndex)
+bool BaseballGameManager::playAttack(const unsigned short nCurrentInning, const unsigned short nCurrentBatterIndex)
 {
     bool bEndTheAtBat = false;
     unsigned short strikeCount = m_pScoreBoard->getStrikeCount();
@@ -191,7 +191,7 @@ bool BaseballGameManager::playAttack(const unsigned short nCurrentBatterIndex)
     bEndTheAtBat = m_pOfficialScorer->calculatePitchingResult(pitchResult);
     m_pOfficialScorer->increaseTeamPitchingCount();
 
-    m_pScoreBoard->showScoreBoard();
+    m_pScoreBoard->showScoreBoard(nCurrentInning, nCurrentBatterIndex);
     m_pStatusPrinter->showBatterEnter(nCurrentBatterIndex, m_pCurrentAttackTeam->getMemberName(nCurrentBatterIndex));
     m_pStatusPrinter->showPitchingResult(strikeCount, ballCount, pitchResult);
     m_pStatusPrinter->showCurrentSBO(m_pScoreBoard->getStrikeCount(), m_pScoreBoard->getBallCount(), m_pScoreBoard->getOutCount());
@@ -209,7 +209,6 @@ void BaseballGameManager::setComponent(const unsigned short currentInning)
     m_pOfficialScorer->setIsCurrentHomeTeam(bIsHomeTeam);
 
     m_pScoreBoard->setIsCurrentHomeTeam(bIsHomeTeam);
-    m_pScoreBoard->setCurrentInning(currentInning);
 }
 
 void BaseballGameManager::setSkipInning(const unsigned short skipInning)
@@ -231,7 +230,7 @@ void BaseballGameManager::playInning(unsigned short nCurrentInning)
         if ( ( getSkipInning() * 2 - 1 < nCurrentInning) &&(m_pScoreBoard->getTeamPitchingCount(true) != 0))
             receiveUserMenuSelectInGame(nCurrentInning);
 
-        bEndTheAtBat = playAttack(nCurrentBatterIndex);
+        bEndTheAtBat = playAttack(nCurrentInning, nCurrentBatterIndex);
 
         if ( true == bEndTheAtBat )
             nCurrentBatterIndex = (nCurrentBatterIndex + 1) % 9;

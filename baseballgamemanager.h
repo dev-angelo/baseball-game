@@ -69,7 +69,7 @@ private:
     bool checkUserMenuSelectionAvailable(const unsigned short userInput) const;
 
     void startGame();
-    bool playAttack(const unsigned short nCurrentBatterIndex);
+    bool playAttack(const unsigned short nCurrentInning, const unsigned short nCurrentBatterIndex);
     void setComponent(const unsigned short currentInning);
 
     void setSkipInning(const unsigned short skipInning);

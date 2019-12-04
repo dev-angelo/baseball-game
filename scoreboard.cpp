@@ -1,13 +1,13 @@
 #include "scoreboard.h"
 #include <iostream>
+#include <iomanip>
 
 ScoreBoard::ScoreBoard() :
     m_nStrikeCount(0),
     m_nBallCount(0),
     m_nHitsCount(0),
     m_nOutCount(0),
-    m_bIsCurrentHomeTeam(false),
-    m_nCurrentInning(0)
+    m_bIsCurrentHomeTeam(false)
 {
     initTeamScore();
     initTeamPitchingCount();
@@ -174,38 +174,41 @@ unsigned short ScoreBoard::getTeamHitsCount(const bool isHomeTeam) const
     return teamHitsCount;
 }
 
-void ScoreBoard::showScoreBoard()
+void ScoreBoard::showScoreBoard(const unsigned short currentInning,
+                                const unsigned short currentBatterIndex)
 {
     std::cout << std::endl;
 
-    std::cout << "+---------------------------------+" << std::endl;
-    showCurrentInning();
-    std::cout << "+---------------------------------+" << std::endl;
+    std::cout << "+---------------------------------------------+" << std::endl;
+    showCurrentInning(currentInning);
+    std::cout << "+---------------------------------------------+" << std::endl;
     showTitle();
     showTeamScore();
     showTeamName();
-    showTeamMemberName();
+    showTeamMemberName(currentInning, currentBatterIndex);
     showTeamPitchingAndStrikeCount();
     showTeamThreeStrikeAndBallCount();
     showTeamHitsAndOutCount();
 
-    std::cout << "-----------------------------------" << std::endl;
+    std::cout << "+---------------------------------------------+" << std::endl;
 }
 
 void ScoreBoard::showTitle()
 {
-    std::cout << "|";
-    std::cout << "1 2 3 4 5 6  | TOT" << std::endl;
+    std::cout << std::left << std::setw(21) <<"|";
+    std::cout << std::left << std::setw(20) << "1  2  3  4  5  6  | TOT" << std::endl;
 }
 
 void ScoreBoard::showTeamScore()
 {
     for ( std::vector<int>::size_type index = 0 ; index < 2 ; ++index ) {
-        std::cout << "|" << " " << m_lTeamName[index] << "\t";
+        std::cout << std::left << "|" << std::setw(20) << m_lTeamName[index];
 
-        for ( int inning = 0 ; inning < 6 ; ++inning ) {
-            std::cout << m_lTeamScore[index][inning] << " ";
-        }
+        for ( int inning = 0 ; inning < 6 ; ++inning )
+            std::cout << std::left << std::setw(3) << m_lTeamScore[index][inning];
+
+        std::cout << std::setw(3) << "  "
+                  << std::setw(3) << getTeamScore(!static_cast<bool>(index));
 
         std::cout << std::endl;
     }
@@ -215,20 +218,32 @@ void ScoreBoard::showTeamName()
 {
     std::cout << "|" << std::endl;
     std::cout << "|";
-    std::cout << m_lTeamName[0] << " " << m_lTeamName[1] << std::endl;
+    std::cout << std::setw(23) << m_lTeamName[0]
+              << std::setw(23) << m_lTeamName[1] << std::endl;
 }
 
-void ScoreBoard::showTeamMemberName()
+void ScoreBoard::showTeamMemberName(const unsigned short currentInning, const unsigned short batterIndex)
 {
+    std::string strHomeTeamMemberName = "";
+    std::string strAwayTeamMemberName = "";
+
     for ( std::vector<int>::size_type index = 0 ; index < 9 ; ++index ) {
+        strHomeTeamMemberName = m_lTeamMemberName[0][index];
+        strAwayTeamMemberName = m_lTeamMemberName[1][index];
+
         std::cout << "|";
-        std::cout << index << ". " << m_lTeamMemberName[0][index] << " "
-                  << index << ". " << m_lTeamMemberName[1][index] << std::endl;
+        std::cout << std::setw(1) << index << std::setw(2) << ". " << std::setw(20)
+                  << strHomeTeamMemberName.append(((batterIndex == index) && (currentInning % 2) == 0? " V" : ""))
+                  << std::setw(1) << index << std::setw(2) << ". "
+                  << std::setw(20)
+                  << strAwayTeamMemberName.append(((batterIndex == index) && (currentInning % 2) == 1? " V" : ""))
+                  << std::endl;
     }
 }
 
 void ScoreBoard::showTeamPitchingAndStrikeCount()
 {
+    std::cout << "|" << std::endl;
     std::cout << "|";
     std::cout << "투구: " << getTeamPitchingCount(m_bIsCurrentHomeTeam) << "\t"
               << "S: " << getStrikeCount()
@@ -251,22 +266,17 @@ void ScoreBoard::showTeamHitsAndOutCount()
               << std::endl;
 }
 
-void ScoreBoard::showCurrentInning()
+void ScoreBoard::showCurrentInning(const unsigned short currentInning)
 {
-    bool bIsTop = m_nCurrentInning % 2;
+    bool bIsTop = currentInning % 2;
 
-    std::cout << (m_nCurrentInning / 2) + 1 << "회" << (false == bIsTop ? "초" : "말") << " ";
+    std::cout << (currentInning / 2) + 1 << "회" << (false == bIsTop ? "초" : "말") << " ";
     std::cout << m_lTeamName[bIsTop] << "의 공격" << std::endl;
 }
 
 void ScoreBoard::setIsCurrentHomeTeam(const bool isCurrentHomeTeam)
 {
     m_bIsCurrentHomeTeam = isCurrentHomeTeam;
-}
-
-void ScoreBoard::setCurrentInning(const unsigned short currentInning)
-{
-    m_nCurrentInning = currentInning;
 }
 
 void ScoreBoard::initTeamScore()

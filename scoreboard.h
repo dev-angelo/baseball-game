@@ -59,10 +59,9 @@ public:
     void setTeamName(std::vector<std::string> teamName);
     void setTeamMemberName(const std::vector<std::vector<std::string>> teamMemberName);
 
-    void showScoreBoard();
+    void showScoreBoard(const unsigned short nCurrentInning, const unsigned short nCurrentBatterIndex);
 
     void setIsCurrentHomeTeam(const bool isCurrentHomeTeam);
-    void setCurrentInning(const unsigned short currentInning);
 
 private:
     unsigned short m_nStrikeCount;
@@ -70,7 +69,6 @@ private:
     unsigned short m_nHitsCount;
     unsigned short m_nOutCount;
     bool m_bIsCurrentHomeTeam;
-    unsigned short m_nCurrentInning;
 
     unsigned short m_lTeamScore[2][6];
     unsigned short m_lTeamPitchingCount[2];
@@ -129,11 +127,11 @@ private:
     void showTitle();
     void showTeamScore();
     void showTeamName();
-    void showTeamMemberName();
+    void showTeamMemberName(const unsigned short currentInning, const unsigned short batterIndex);
     void showTeamPitchingAndStrikeCount();
     void showTeamThreeStrikeAndBallCount();
     void showTeamHitsAndOutCount();
-    void showCurrentInning();
+    void showCurrentInning(const unsigned short currentInning);
 };
 
 #endif // SCOREBOARD_H
