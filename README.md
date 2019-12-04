@@ -3,7 +3,8 @@ BaseballGame Repository 는 CodeSquard 의 마스터즈 코스 온라인 테스�
 step-1 Branch 는 야구게임 만들기 1단계에 해당하는 *step-1* 에 대한 요구사항을 구현 한 브랜치 입니다.  
 ## 각 Class 설명
 ### BaseballGameManager Class
-Pitching Result/OfficialScorer/ScoreBoard/StatusPrinter 객체 생성 및 step-1 의 시나리오를 만족하기 위한 flow 가 구현 되는 class 이다.
+Pitching Result/OfficialScorer/ScoreBoard/StatusPrinter 객체 생성 및  
+step-1 의 시나리오를 만족하기 위한 flow 가 구현 되는 class 이다.
 ### PitchingResultGenerator Class
 각 투구의 결과를 랜덤하게 생성하는 역할을 하는 class 이다.</br></br>
 랜덤하게 생성되는 투구의 결과는 아래와 같다.  
@@ -12,25 +13,9 @@ Pitching Result/OfficialScorer/ScoreBoard/StatusPrinter 객체 생성 및 step-1
 * Hits (안타)
 * Out
 
-```c++
-enum class PitchingResult
-{
-    STRIKE,
-    BALL,
-    HITS,
-    OUT
-};
-```
-랜덤하게 투구 결과를 생성하는 코드는 아래와 같다.
+BaseBallManager 는 아래 함수를 호출하여 투구 결과를 전달받는다.
 ```c++ 
 PitchingResult PitchingResultGenerator::generatePitchingResult()
-{
-    int nRandomNumber = std::rand() % 4;
-
-    PitchingResult ePitchingResult = static_cast<PitchingResult>(nRandomNumber);
-
-    return ePitchingResult;
-}
 ```
 항상 같은 결과가 나오는것을 방지하기 위해 class 가 생성 될 때 아래와 같은 작업을 수행한다.
 ```c++
@@ -40,22 +25,41 @@ PitchingResultGenerator::PitchingResultGenerator()
 }
 ```
 ### OfficialScorer Class
-PitchingResultGenerator 클래스로부터 생성 된 투구 결과를 토대로 ScoreBoard 의 값을 조작하는 class 이다.  
-조작하는 값은 아래와 같다.  
-* Strike 를 전달 받았을 때  
+PitchingResultGenerator 클래스로부터 생성 된 투구 결과를 토대로 ScoreBoard 의 값을 조작하는 class 이다.</br></br>
+BaseballManager 는 PitchingResultGenerator 로 부터 전달받은 결과를  
+아래 함수를 통해 OfficialScore class 에게 결과 계산을 요청한다.
+```c++
+bool OfficialScorer::calculatePitchingResult(PitchingResult pitchingResult)
+```
+
+calculatePitchingResult(..) 내부에서는 pitchingResult 에 따라 아래 각 함수가 호출된다.  
+```c++
+bool OfficialScorer::calculateStrikeOccurs()
+```  
+* Strike 를 전달 받았을 때: calculateStrikeOccurs(..)  
   * ScoreBoard 객체의 Strike Count 를 1 증가시킨다.  
     * ScoreBoard 의 Strike Count 를 1 증가시킨 후의 값이 3 이면 Strike/Ball Count 를 0 으로 만들고 Out Count 를 1 증가시킨다.  
-* Ball 을 전달 받았을 때  
-  * ScoreBoard 의 Ball Count 를 1 증가시킨다.  
-    * ScoreBoard 의 Ball Count 를 1 증가시킨 후의 값이 4 면 Strike/Ball Count 를 0 으로 만들고 Hits Count 를 1 증가시킨다.  
-* Hits Count 를 전달 받았을 때  
-  * ScoreBoard 의 Hits Count 를 1 증가시킨 후 Strike/Ball Count 를 0 으로 만든다.  
-* Out Count 을 전달 받았을 때  
-  * ScoreBoard 의 Out Count 를 1 증가시킨다. 
-* Strike/Ball/Hits/Out 공통: 타자가 바뀌는 상황에 대한 여부를 반환한다.  
+
+```c++
+bool OfficialScorer::calculateBallOccurs()
+```
+* Ball 을 전달 받았을 때</br>
+  * ScoreBoard 의 Ball Count 를 1 증가시킨다.</br>
+    * ScoreBoard 의 Ball Count 를 1 증가시킨 후의 값이 4 면 Strike/Ball Count 를 0 으로 만들고 Hits Count 를 1 증가시킨다.</br>
+```c++
+bool OfficialScorer::calculateHitsOccurs()
+```
+* Hits Count 를 전달 받았을 때</br>
+  * ScoreBoard 의 Hits Count 를 1 증가시키고 Strike/Ball Count 를 0 으로 만든다.</br>
+```c++
+bool OfficialScorer::calculateOutOccurs()
+```
+* Out Count 을 전달 받았을 때</br>
+  * ScoreBoard 의 Out Count 를 1 증가시키고 Strike/Ball Count 를 0 으로 만든다.</br>
+* Strike/Ball/Hits/Out 공통: 타자가 바뀌는 상황에 대한 여부를 반환한다.</br>
 ### ScoreBoard Class
-경기중 상태 (Strike/Ball/Out) 및 안타 (Hits) 수를 저장하고 있는 class 이다.  
-저장되는 값은 아래와 같다.
+경기중 상태 (Strike/Ball/Out) 및 안타 (Hits) 수를 저장하고 있는 class 이다.</br>
+저장되는 값은 아래와 같다.</br>
 * Strike Count
 * Ball Count
 * Hits Count
