@@ -34,7 +34,7 @@ double BaseballTeam::getMemberBattingAverage(const unsigned short memberIndex) c
 {
     double fBattingAverage = 0;
 
-    if ( m_lMemberBattingAverage.size() < memberIndex ) {
+    if ( m_lMemberBattingAverage.size() <= memberIndex ) {
         fBattingAverage = 0;
     }
     else {
@@ -48,7 +48,7 @@ std::string BaseballTeam::getMemberName(const unsigned short memberIndex) const
 {
     std::string strName;
 
-    if ( m_lMemberName.size() < memberIndex ) {
+    if ( m_lMemberName.size() <= memberIndex ) {
         strName = "";
     }
     else {
