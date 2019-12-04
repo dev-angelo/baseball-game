@@ -11,7 +11,7 @@ ScoreBoard::ScoreBoard() :
 {
     initTeamScore();
     initTeamPitchingCount();
-    initTeamThreeOutCount();
+    initTeamThreeStrikeCount();
     initTeamHitsCount();
 
     m_lTeamName.clear();
@@ -65,12 +65,12 @@ void ScoreBoard::setTeamPitchingCount(const unsigned short pitchingCount, const 
         m_lTeamPitchingCount[1] = pitchingCount;
 }
 
-void ScoreBoard::setTeamThreeOutCount(const unsigned short threeOutCount, const bool isHomeTeam)
+void ScoreBoard::setTeamThreeStrikeCount(const unsigned short threeStrikeCount, const bool isHomeTeam)
 {
     if ( true == isHomeTeam )
-        m_lTeamThreeOutCount[0] = threeOutCount;
+        m_lTeamThreeStrikeCount[0] = threeStrikeCount;
     else
-        m_lTeamThreeOutCount[1] = threeOutCount;
+        m_lTeamThreeStrikeCount[1] = threeStrikeCount;
 }
 
 void ScoreBoard::setTeamHitsCount(const unsigned short hitsCount, const bool isHomeTeam)
@@ -150,14 +150,14 @@ unsigned short ScoreBoard::getTeamPitchingCount(const bool isHomeTeam) const
     return teamPitchingCount;
 }
 
-unsigned short ScoreBoard::getTeamThreeOutCount(const bool isHomeTeam) const
+unsigned short ScoreBoard::getTeamThreeStrikeCount(const bool isHomeTeam) const
 {
     unsigned short teamThreeOutCount = 0;
 
     if ( true == isHomeTeam )
-        teamThreeOutCount = m_lTeamThreeOutCount[0];
+        teamThreeOutCount = m_lTeamThreeStrikeCount[0];
     else
-        teamThreeOutCount = m_lTeamThreeOutCount[1];
+        teamThreeOutCount = m_lTeamThreeStrikeCount[1];
 
     return teamThreeOutCount;
 }
@@ -253,7 +253,7 @@ void ScoreBoard::showTeamPitchingAndStrikeCount()
 void ScoreBoard::showTeamThreeStrikeAndBallCount()
 {
     std::cout << "|";
-    std::cout << "»ïÁø: " << getTeamThreeOutCount(m_bIsCurrentHomeTeam) << "\t"
+    std::cout << "»ïÁø: " << getTeamThreeStrikeCount(m_bIsCurrentHomeTeam) << "\t"
               << "B: " << getBallCount()
               << std::endl;
 }
@@ -298,11 +298,11 @@ void ScoreBoard::initTeamPitchingCount()
     }
 }
 
-void ScoreBoard::initTeamThreeOutCount()
+void ScoreBoard::initTeamThreeStrikeCount()
 {
     for ( int teamIndex = 0 ; teamIndex < 2 ; ++teamIndex )
     {
-        m_lTeamThreeOutCount[teamIndex] = 0;
+        m_lTeamThreeStrikeCount[teamIndex] = 0;
     }
 }
 

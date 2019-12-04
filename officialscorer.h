@@ -33,7 +33,7 @@ public:
     void setCurrentInning(const unsigned short currentInning);
 
     void increaseTeamPitchingCount() const;
-    void increaseTeamThreeOutCount() const;
+    void increaseTeamThreeStrikeCount() const;
     void increaseTeamHitsCount() const;
 
 private:

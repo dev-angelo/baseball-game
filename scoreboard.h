@@ -53,7 +53,7 @@ public:
     unsigned short getTeamScore(const unsigned short inning, const bool isHomeTeam) const;
 
     unsigned short getTeamPitchingCount(const bool isHomeTeam) const;
-    unsigned short getTeamThreeOutCount(const bool isHomeTeam) const;
+    unsigned short getTeamThreeStrikeCount(const bool isHomeTeam) const;
     unsigned short getTeamHitsCount(const bool isHomeTeam) const;
 
     void setTeamName(std::vector<std::string> teamName);
@@ -72,7 +72,7 @@ private:
 
     unsigned short m_lTeamScore[2][6];
     unsigned short m_lTeamPitchingCount[2];
-    unsigned short m_lTeamThreeOutCount[2];
+    unsigned short m_lTeamThreeStrikeCount[2];
     unsigned short m_lTeamHitsCount[2];
 
     std::vector<std::string> m_lTeamName;
@@ -80,7 +80,7 @@ private:
 
     void initTeamScore();
     void initTeamPitchingCount();
-    void initTeamThreeOutCount();
+    void initTeamThreeStrikeCount();
     void initTeamHitsCount();
 
 
@@ -121,7 +121,7 @@ private:
     void setTeamScore(const unsigned short score, const unsigned short inning, const bool isHomeTeam);
 
     void setTeamPitchingCount(const unsigned short pitchingCount, const bool isHomeTeam);
-    void setTeamThreeOutCount(const unsigned short threeOutCount, const bool isHomeTeam);
+    void setTeamThreeStrikeCount(const unsigned short threeStrikeCount, const bool isHomeTeam);
     void setTeamHitsCount(const unsigned short hitsCount, const bool isHomeTeam);
 
     void showTitle();

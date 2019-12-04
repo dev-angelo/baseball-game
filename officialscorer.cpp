@@ -60,11 +60,11 @@ void OfficialScorer::increaseTeamPitchingCount() const
                                     , bIsCurrentHomeTeam);
 }
 
-void OfficialScorer::increaseTeamThreeOutCount() const
+void OfficialScorer::increaseTeamThreeStrikeCount() const
 {
     bool bIsCurrentHomeTeam = getIsCurrentHomeTeam();
 
-    m_pScoreBoard->setTeamThreeOutCount(m_pScoreBoard->getTeamThreeOutCount(bIsCurrentHomeTeam) + 1
+    m_pScoreBoard->setTeamThreeStrikeCount(m_pScoreBoard->getTeamThreeStrikeCount(bIsCurrentHomeTeam) + 1
                                     , bIsCurrentHomeTeam);
 }
 
@@ -149,7 +149,7 @@ void OfficialScorer::handleSBHOThreeStrikeOccurs() const
     m_pScoreBoard->setStrikeCount(0);
     m_pScoreBoard->setBallCount(0);
 
-    increaseTeamThreeOutCount();
+    increaseTeamThreeStrikeCount();
 }
 
 void OfficialScorer::handleSBHOFourBallOccurs() const
