@@ -59,7 +59,7 @@ int PitchingResultGenerator::generateRandomValue(const int maxSize) const
 
     std::mt19937 rnd( millis );
 
-    std::uniform_int_distribution<int> range(1, maxSize);
+    std::uniform_int_distribution<int> range(0, maxSize);
 
     return range( rnd );
 }
